@@ -12,7 +12,7 @@ for i in range(len(coords)):
 dists.sort(key=lambda x: x[0])
 
 circuits = {}
-for round in range(1000):
+for round in range(len(dists)):
     _, next1, next2 = dists[round]
     c = set()
     for n in [next1, next2]:
@@ -21,10 +21,6 @@ for round in range(1000):
             c.add(nn)
     for n in c:
         circuits[n] = c
-
-uniques = list(set(frozenset(x) for x in circuits.values()))
-uniques.sort(key=lambda x: len(x), reverse=True)
-rv = 1
-for i in range(3):
-    rv *= len(uniques[i])
-print(rv)
+    if len(c) == len(coords):
+        print(coords[next1][0]*coords[next2][0])
+        break
