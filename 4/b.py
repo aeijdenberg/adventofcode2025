@@ -16,8 +16,16 @@ def adjacents(rolls, key):
     return rv
 
 rv = 0
-for candidate in rolls:
-    if adjacents(rolls, candidate) < 4:
-        rv += 1
+while True:
+    tbd = []
+    for candidate in rolls:
+        if adjacents(rolls, candidate) < 4:
+            tbd.append(candidate)
+    if not len(tbd):
+        break
+
+    rv += len(tbd)
+    for c in tbd:
+        del rolls[c]
 
 print(rv)
